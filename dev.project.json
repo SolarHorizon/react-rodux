@@ -1,0 +1,14 @@
+{
+  "name": "rodux-utils-test",
+  "tree": {
+    "$className": "DataModel",
+    "ReplicatedStorage": {
+      "Packages": {
+        "$path": "Packages/",
+        "ReactRodux": {
+          "$path": "default.project.json"
+        }
+      }
+    }
+  }
+}

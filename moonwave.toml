@@ -1,0 +1,5 @@
+title = "React Rodux"
+
+[home]
+enabled = true
+includeReadme = false
