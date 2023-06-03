@@ -3,9 +3,9 @@ local createDispatchHook = require(script.Parent.createDispatchHook)
 
 --[=[
 	@within ReactRodux
-	@function createDispatchHook
+	@function useDispatch
 	@param context ReactContext<Store>
-	@return useStore
+	@return (Action) -> ()
 
 	Returns the dispatch function of Rodux store that was passed into the 
 	Provider.

@@ -3,9 +3,9 @@ local createStoreHook = require(script.Parent.createStoreHook)
 
 --[=[
 	@within ReactRodux
-	@function createDispatchHook
+	@function useStore
 	@param context ReactContext<Store>
-	@return useStore
+	@return Store
 
 	Returns the Rodux store that was passed into the Provider. This might be
 	useful if you need to use the store for something other than getting state

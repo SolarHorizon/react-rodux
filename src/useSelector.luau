@@ -3,9 +3,9 @@ local createSelectorHook = require(script.Parent.createSelectorHook)
 
 --[=[
 	@within ReactRodux
-	@function createSelectorHook
+	@function useSelector
 	@param context ReactContext<Store>
-	@return useStore
+	@return Selection
 
 	This is the primary way to get data from a Rodux store with React Rodux. 
 	Multiple useSelector hooks can be used in the same component.
