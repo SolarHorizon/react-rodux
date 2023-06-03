@@ -1,5 +1,5 @@
 [package]
-name = "solarhorizon/rodux-utils"
+name = "solarhorizon/react-rodux"
 description = "A simple bridge between React and Rodux"
 authors = ["SolarHorizon"]
 version = "0.1.0"
