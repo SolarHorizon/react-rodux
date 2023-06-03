@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[849],{63891:r=>{r.exports=JSON.parse('{"sourceUrl":"https://github.com/SolarHorizon/react-rodux/blob/master","baseUrl":"/react-rodux/","classOrder":[],"apiCategories":[]}')}}]);

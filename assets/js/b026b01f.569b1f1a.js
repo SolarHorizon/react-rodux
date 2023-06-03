@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[696],{7636:e=>{e.exports=JSON.parse('[{"type":"link","href":"/api/ReactRodux","label":"\u200bReact\u200bRodux"}]')}}]);
