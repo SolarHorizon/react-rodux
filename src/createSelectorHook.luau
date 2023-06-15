@@ -1,5 +1,7 @@
 local React = require(script.Parent.Parent.React)
 local Context = require(script.Parent.Context)
+local useSyncExternalStoreWithSelector =
+	require(script.Parent.useSyncExternalStoreWithSelector)
 
 type Selector = <State, Selection>(State, ...any) -> Selection
 type EqualityFn<T> = (old: T, new: T) -> boolean
@@ -31,34 +33,29 @@ local function createSelectorHook<State>(context: Context.StoreContext<State>)
 	)
 		local store = React.useContext(context)
 
-		local selection, setSelection = React.useState(function()
-			return selector(store:getState())
-		end)
-
-		local prevSelection = React.useRef(selection)
-
 		if not equalityFn then
 			equalityFn = defaultEqualityFn
 		end
 
-		React.useEffect(function()
-			-- Rodux types store.changed as an RBXScriptSignal which is incorrect
-			local storeChanged = (store.changed :: any):connect(function(state)
-				local newSelection = selector(state)
-
-				-- Luau doesn't realize that equalityFn can't be nil here
-				if
-					not (equalityFn :: any)(newSelection, prevSelection.current)
-				then
-					prevSelection.current = newSelection
-					setSelection(newSelection)
-				end
-			end)
+		local subscribe = React.useCallback(function(callback)
+			local signal = (store.changed :: any):connect(callback)
 
 			return function()
-				storeChanged:disconnect()
+				signal:disconnect()
 			end
-		end, { selector })
+		end, { store })
+
+		local getSnapshot = React.useCallback(function()
+			return store:getState()
+		end, { store })
+
+		local selection = useSyncExternalStoreWithSelector(
+			subscribe,
+			getSnapshot,
+			nil,
+			selector,
+			equalityFn
+		)
 
 		return selection
 	end
