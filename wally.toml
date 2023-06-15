@@ -2,7 +2,7 @@
 name = "solarhorizon/react-rodux"
 description = "A simple bridge between React and Rodux"
 authors = ["SolarHorizon"]
-version = "0.1.0"
+version = "0.2.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 license = "MIT"
@@ -12,3 +12,4 @@ include = ["src", "src/**", "wally.toml", "wally.lock", "default.project.json"]
 [dependencies]
 React = "core-packages/react@17.0.1-rc.19"
 Rodux = "roblox/rodux@4.0.0-rc.0"
+LuauPolyfill = "core-packages/luau-polyfill@1.2.3"
