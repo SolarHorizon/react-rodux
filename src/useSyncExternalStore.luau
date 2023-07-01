@@ -3,8 +3,8 @@
 -- * This source code is licensed under the MIT license found in the
 -- * LICENSE file in the root directory of this source tree.
 
-local React = require(script.Parent.Parent.React)
 local LuauPolyfill = require(script.Parent.Parent.LuauPolyfill)
+local React = require(script.Parent.Parent.React)
 
 local didWarnUncachedGetSnapshot = false
 local is = LuauPolyfill.Object.is
@@ -37,7 +37,7 @@ local function checkIfSnapshotChanged<T>(
 end
 
 local function useSyncExternalStore<T>(
-	subscribe: (() -> ()) -> (() -> ()),
+	subscribe: (() -> ()) -> () -> (),
 	getSnapshot: () -> T,
 	-- Note: The shim does not use getServerSnapshot, because pre-18 versions of
 	-- React do not expose a way to check if we're hydrating. So users of the shim
@@ -75,15 +75,17 @@ local function useSyncExternalStore<T>(
 	-- To implement the early bailout, we need to track some things on a mutable
 	-- object. Usually, we would put that in a useRef hook, but we can stash it in
 	-- our useState hook instead.
-	--
-	-- To force a re-render, we call forceUpdate(inst). That works because the
-	-- new object always fails an equality check.
-	local state, forceUpdate = React.useState({
+	local state, setState = React.useState({
 		inst = {
 			value = value,
 			getSnapshot = getSnapshot,
 		},
 	})
+
+	-- To force a re-render, we call forceUpdate(inst)
+	local forceUpdate = React.useCallback(function(inst)
+		setState(table.clone(inst))
+	end, {})
 
 	-- Track the latest getSnapshot function with a ref. This needs to be updated
 	-- in the layout phase so we can access it during the tearing check that
