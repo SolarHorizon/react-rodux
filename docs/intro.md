@@ -1,3 +1,7 @@
+:::caution
+This library is not yet ready for production. Try using a [fork of rodux-hooks](https://wally.run/package/metrowaii/rodux-hooks?version=0.3.2) instead.
+:::caution
+
 # Getting Started
 
 React Rodux helps you bridge your [React](https://github.com/jsdotlua/react-lua)
