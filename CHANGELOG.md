@@ -1,3 +1,7 @@
+## 0.2.2
+
+- Updated React version
+
 ## 0.2.1
 
 - Fixed `useSelector` not properly triggering re-renders
